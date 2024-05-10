@@ -8,6 +8,7 @@ const VARIANT_OPTIONS = ['notice', 'warning', 'success', 'error'];
 
 function ToastPlayground() {
   const [selectedVariant, setSelectedVariant] = React.useState("notice");
+  const [message, setMessage] = React.useState("");
 
   return (
     <div className={styles.wrapper}>
@@ -26,7 +27,14 @@ function ToastPlayground() {
             Message
           </label>
           <div className={styles.inputWrapper}>
-            <textarea id="message" className={styles.messageInput} />
+            <textarea 
+              id="message"
+              className={styles.messageInput}
+              value={message}
+              onChange={(event) => {
+                setMessage(event.target.value);
+              }}
+             />
           </div>
         </div>
 
