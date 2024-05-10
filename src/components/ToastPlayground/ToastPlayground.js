@@ -33,17 +33,20 @@ function ToastPlayground() {
           <div
             className={`${styles.inputWrapper} ${styles.radioWrapper}`}
           >
-            <label htmlFor="variant-notice">
-              <input
-                id="variant-notice"
-                type="radio"
-                name="variant"
-                value="notice"
-              />
-              notice
-            </label>
-
-            {/* TODO Other Variant radio buttons here */}
+            {VARIANT_OPTIONS.map(option => {
+              const variantId = `variant-${option}`;
+              return (
+                <label htmlFor={variantId}>
+                  <input
+                    id={variantId}
+                    type="radio"
+                    name="variant"
+                    value={option}
+                  />
+                  notice
+                </label>
+              );
+            })}
           </div>
         </div>
 
