@@ -1,14 +1,20 @@
 import React from 'react';
 
 import Button from '../Button';
+import Toast from '../Toast';
 
 import styles from './ToastPlayground.module.css';
 
 const VARIANT_OPTIONS = ['notice', 'warning', 'success', 'error'];
 
 function ToastPlayground() {
-  const [selectedVariant, setSelectedVariant] = React.useState(VARIANT_OPTIONS[0]);
+  const [variant, setVariant] = React.useState(VARIANT_OPTIONS[0]);
   const [message, setMessage] = React.useState("");
+  const [ showToast, setShowToast ] = React.useState(false);
+
+  const handleDismiss = React.useCallback(() => {
+    setShowToast(false);
+  }, []);
 
   return (
     <div className={styles.wrapper}>
@@ -16,6 +22,13 @@ function ToastPlayground() {
         <img alt="Cute toast mascot" src="/toast.png" />
         <h1>Toast Playground</h1>
       </header>
+
+      {showToast && <Toast
+        variant={variant}
+        handleDismiss={handleDismiss}
+      >
+        {message}
+      </Toast>}
 
       <div className={styles.controlsWrapper}>
         <div className={styles.row}>
@@ -34,7 +47,7 @@ function ToastPlayground() {
               onChange={(event) => {
                 setMessage(event.target.value);
               }}
-             />
+            />
           </div>
         </div>
 
@@ -53,9 +66,9 @@ function ToastPlayground() {
                     type="radio"
                     name="variant"
                     value={option}
-                    checked={option === selectedVariant}
+                    checked={option === variant}
                     onChange={(event) => {
-                      setSelectedVariant(event.target.value);
+                      setVariant(event.target.value);
                     }}
                   />
                   {option}
@@ -70,7 +83,9 @@ function ToastPlayground() {
           <div
             className={`${styles.inputWrapper} ${styles.radioWrapper}`}
           >
-            <Button>Pop Toast!</Button>
+            <Button onClick={() => setShowToast(true)}>
+              Pop Toast!
+            </Button>
           </div>
         </div>
       </div>
