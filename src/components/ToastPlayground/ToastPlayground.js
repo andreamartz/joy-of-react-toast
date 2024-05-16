@@ -10,12 +10,10 @@ const VARIANT_OPTIONS = ['notice', 'warning', 'success', 'error'];
 function ToastPlayground() {
   const [ variant, setVariant ] = React.useState(VARIANT_OPTIONS[0]);
   const [ message, setMessage ] = React.useState("");
-
   const [ toasts, setToasts ] = React.useState([]);
 
   const handleDismiss = (id) => {
     const nextToasts = toasts.filter(toast => toast.id !== id);
-    console.log({nextToasts});
     setToasts(nextToasts);
   };
 
@@ -30,7 +28,7 @@ function ToastPlayground() {
 
     setToasts(nextToasts);
     setMessage('');
-    setVariant('notice');
+    setVariant(VARIANT_OPTIONS[0]);
   };
 
   return (
