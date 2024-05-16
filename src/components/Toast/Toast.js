@@ -20,7 +20,8 @@ const ICONS_BY_VARIANT = {
 };
 
 function Toast(props) {
-  const { variant, handleDismiss, children } = props;
+  const { toast, handleDismiss, children } = props;
+  const { id, variant } = toast;
   const Icon = ICONS_BY_VARIANT[variant];
 
   return (
@@ -32,7 +33,7 @@ function Toast(props) {
         {children}
       </p>
       <button className={styles.closeButton}
-        onClick={ handleDismiss }
+        onClick={() => handleDismiss(id)}
       >
         <X size={24} />
         <VisuallyHidden>Dismiss message</VisuallyHidden>
